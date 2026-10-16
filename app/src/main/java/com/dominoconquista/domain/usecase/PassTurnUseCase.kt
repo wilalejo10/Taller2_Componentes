@@ -1,25 +1,19 @@
 package com.dominoconquista.domain.usecase
 
+import com.dominoconquista.domain.event.ActionResult
+import com.dominoconquista.domain.event.GameEvent
+import com.dominoconquista.domain.event.RejectReason
 import com.dominoconquista.domain.model.GameState
 import com.dominoconquista.domain.rules.GameRules
+import com.dominoconquista.domain.rules.TurnManager
 
+/** A player who cannot move and cannot draw loses the turn. */
 class PassTurnUseCase {
-    operator fun invoke(state: GameState): GameState {
-        if (state.isOver) return state
-        val player = state.currentPlayer
-        // Can only pass when there is no move and nothing left to draw
-        if (state.boneyard.isNotEmpty() || GameRules.hasAnyMove(player.hand, state.board)) return state
+    operator fun invoke(state: GameState): ActionResult {
+        state.commonRejection()?.let { return ActionResult.rejected(state, it) }
+        if (state.boneyard.isNotEmpty()) return ActionResult.rejected(state, RejectReason.POOL_NOT_EMPTY)
+        if (GameRules.currentPlayerHasMove(state)) return ActionResult.rejected(state, RejectReason.MUST_PLAY)
 
-        val passes = state.consecutivePasses + 1
-        val blocked = passes >= state.players.size
-        val winnerId = if (blocked) {
-            state.players.minByOrNull { GameRules.handScore(it.hand) }?.id
-        } else null
-
-        return state.copy(
-            currentPlayerIndex = (state.currentPlayerIndex + 1) % state.players.size,
-            consecutivePasses = passes,
-            winnerId = winnerId
-        )
+        return TurnManager.endTurn(state, listOf(GameEvent.TurnPassed(state.currentPlayer.id)), passed = true)
     }
 }
