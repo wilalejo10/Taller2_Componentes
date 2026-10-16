@@ -3,45 +3,24 @@ package com.dominoconquista
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.dominoconquista.ui.theme.Taller2_ComponentesTheme
+import com.dominoconquista.ui.screens.game.FakeData
+import com.dominoconquista.ui.screens.game.GameScreen
+import com.dominoconquista.ui.theme.DominoConquistaTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            Taller2_ComponentesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            DominoConquistaTheme {
+                GameScreen(
+                    state = FakeData.gameState(),
+                    onTileSelected = {},
+                    onCellClick = { _, _ -> },
+                    onPlace = {},
+                    onDraw = {},
+                    onLeave = {}
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Taller2_ComponentesTheme {
-        Greeting("Android")
     }
 }
