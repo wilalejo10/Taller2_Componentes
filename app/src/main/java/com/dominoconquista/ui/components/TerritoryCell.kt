@@ -40,14 +40,16 @@ fun TerritoryCell(
         CellType.FORTRESS -> CellFortress
         CellType.PORTAL -> CellPortal
     }
+
     val symbol = when (cell.type) {
         CellType.NORMAL -> ""
         CellType.BONUS -> "⭐"
         CellType.TREASURE -> "💎"
         CellType.TRAP -> "💣"
-        CellType.FORTRESS -> "🛡"
+        CellType.FORTRESS -> "🛡️"
         CellType.PORTAL -> "🌀"
     }
+
     val tile = cell.tile
 
     Box(

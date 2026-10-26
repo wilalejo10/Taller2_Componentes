@@ -18,7 +18,8 @@ data class PlayerUi(
     val name: String,
     val score: Int,
     val territories: Int,
-    val colorIndex: Int
+    val colorIndex: Int,
+    val avatarIndex: Int = 0
 )
 
 data class GameUiState(
