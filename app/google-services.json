@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "721069977235",
+    "project_id": "taller2-4a31b",
+    "storage_bucket": "taller2-4a31b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:721069977235:android:db7433dd2cde6aee95a766",
+        "android_client_info": {
+          "package_name": "com.dominoconquista"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAOJjIoQasc7DL5CLOkBHDfj1Lli5Z4Ko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
